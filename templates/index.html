@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-dark text-white py-5 mb-5" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">Ласкаво просимо до Центру Моди</h1>
+                <p class="lead mb-4">Відкрий для себе останні тренди в одязі та аксесуарах.</p>
+                <a href="#shop" class="btn btn-light btn-lg px-4 me-2">Надихнутися</a>
+                <a href="#shop" class="btn btn-outline-light btn-lg px-4">Купити зараз</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="shop">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Популярні товари</h2>
+        <p class="text-muted">Перегляньте наші найкращі пропозиції цього сезону.</p>
+        <button class="btn btn-dark text-white px-4">Дивитись все</button>
+    </div>
+
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="position-absolute p-2">
+                    <span class="badge bg-light text-dark border">New</span>
+                </div>
+                
+                <img src="{{ product.image }}" class="card-img-top p-3" alt="{{ product.name }}" style="height: 300px; object-fit: contain; background-color: #f8f9fa;">
+                
+                <div class="card-body bg-white">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text fw-bold fs-5">{{ product.price }} ₴</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div class="text-warning">
+                            ★★★★★
+                        </div>
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-outline-dark btn-sm">
+                            + В кошик
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mt-5 py-5">
+        <h3 class="fw-bold mb-4">Відгуки клієнтів</h3>
+        <div class="col-md-6 mb-3">
+            <div class="p-4 bg-light rounded">
+                <div class="d-flex align-items-center mb-2">
+                    <strong>Анна</strong> <span class="text-warning ms-2">★★★★★</span>
+                </div>
+                <p class="mb-0">"Мені дуже подобається моя нова сукня! Якість супер."</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="p-4 bg-light rounded">
+                <div class="d-flex align-items-center mb-2">
+                    <strong>Іван</strong> <span class="text-warning ms-2">★★★★★</span>
+                </div>
+                <p class="mb-0">"Ці кросівки такі зручні! Доставка швидка."</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
